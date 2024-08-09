@@ -1,0 +1,31 @@
+pip install smartsheet-python-sdk
+
+import requests
+
+#API Access Token
+access_token = '7VMjKfsz2nTjKsWvyBNvANuytexAqdshZhvuH'
+
+# Base URL for Smartsheet API
+base_url = 'https://api.smartsheet.com/2.0'
+
+# Endpoint to retrieve all sheets
+url = f'{base_url}/sheets'
+
+# Headers for API requests
+headers = {
+    'Authorization': f'Bearer {access_token}',
+    'Content-Type': 'application/json'
+}
+
+try:
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        sheets = response.json()['data']
+        for sheet in sheets:
+            print(f"Sheet Name: {sheet['name']}, Sheet ID: {sheet['id']}")
+    else:
+        print(f"Failed to retrieve sheets. Status code: {response.status_code}")
+
+except requests.exceptions.RequestException as e:
+    print(f"Error fetching sheets: {str(e)}")
