@@ -1,0 +1,24 @@
+import smartsheet
+
+# Initialize Smartsheet client with your API token
+API_TOKEN = '7VMjKfsz2nTjKsWvyBNvANuytexAqdshZhvuH'
+smartsheet_client = smartsheet.Smartsheet(API_TOKEN)
+
+# Specify the sheet ID where you want to delete the data
+SHEET_ID = '8761502974562180'
+
+# Define batch size for deletion
+BATCH_SIZE = 400
+
+# Fetch the sheet and get all rows
+sheet = smartsheet_client.Sheets.get_sheet(SHEET_ID)
+row_ids = [row.id for row in sheet.rows]
+
+# Delete rows in batches
+if row_ids:
+    for i in range(0, len(row_ids), BATCH_SIZE):
+        batch_ids = row_ids[i:i + BATCH_SIZE]
+        response = smartsheet_client.Sheets.delete_rows(SHEET_ID, batch_ids)
+        print(f"Batch {i // BATCH_SIZE + 1} deleted successfully.")
+else:
+    print("No rows to delete.")
