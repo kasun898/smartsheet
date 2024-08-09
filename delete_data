@@ -1,11 +1,11 @@
 import smartsheet
 
 # Initialize Smartsheet client with your API token
-API_TOKEN = '7VMjKfsz2nTjKsWvyBNvANuytexAqdshZhvuH'
+API_TOKEN = 'Token'
 smartsheet_client = smartsheet.Smartsheet(API_TOKEN)
 
 # Specify the sheet ID where you want to delete the data
-SHEET_ID = '8761502974562180'
+SHEET_ID = 'sheetIF'
 
 # Define batch size for deletion
 BATCH_SIZE = 400
