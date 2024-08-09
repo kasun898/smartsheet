@@ -3,7 +3,7 @@ pip install smartsheet-python-sdk
 import requests
 
 #API Access Token
-access_token = '7VMjKfsz2nTjKsWvyBNvANuytexAqdshZhvuH'
+access_token = 'Token'
 
 # Base URL for Smartsheet API
 base_url = 'https://api.smartsheet.com/2.0'
