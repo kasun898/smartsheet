@@ -2,11 +2,11 @@ import smartsheet
 import csv
 
 # Initialize Smartsheet client with your API token
-API_TOKEN = '7VMjKfsz2nTjKsWvyBNvANuytexAqdshZhvuH'
+API_TOKEN = 'Token'
 smartsheet_client = smartsheet.Smartsheet(API_TOKEN)
 
 # Specify the sheet ID where you want to upload the data
-SHEET_ID = '8761502974562180'
+SHEET_ID = 'SheetID'
 
 # Path to your CSV file
 csv_file_path = 'D:\Program Files\Python_VM\fd_rates_above_1_year.csv'
