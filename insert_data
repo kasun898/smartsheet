@@ -1,0 +1,35 @@
+import smartsheet
+import csv
+
+# Initialize Smartsheet client with your API token
+API_TOKEN = '7VMjKfsz2nTjKsWvyBNvANuytexAqdshZhvuH'
+smartsheet_client = smartsheet.Smartsheet(API_TOKEN)
+
+# Specify the sheet ID where you want to upload the data
+SHEET_ID = '8761502974562180'
+
+# Path to your CSV file
+csv_file_path = 'D:\Program Files\Python_VM\fd_rates_above_1_year.csv'
+
+# Fetch the Smartsheet columns and create a mapping from column title to column ID
+sheet = smartsheet_client.Sheets.get_sheet(SHEET_ID)
+column_map = {col.title: col.id for col in sheet.columns}
+
+# Read the CSV file and add data to the Smartsheet
+rows = []
+with open(csv_file_path, newline='') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        smartsheet_row = smartsheet_client.models.Row()
+        for column_name, cell_value in row.items():
+            column_id = column_map.get(column_name)  # Get the matching column ID
+            if column_id:
+                smartsheet_row.cells.append({
+                    'column_id': column_id,
+                    'value': cell_value
+                })
+        rows.append(smartsheet_row)
+
+# Add rows to the Smartsheet
+response = smartsheet_client.Sheets.add_rows(SHEET_ID, rows)
+print("Rows added successfully:", response.message)
